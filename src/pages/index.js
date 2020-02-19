@@ -29,7 +29,7 @@ const IndexPage = ({ data }) => {
                     - {node.frontmatter.date}
                   </span>
                 </h3>
-                <p>{node.excerpt}</p>
+                <p>{node.frontmatter.excerpt}</p>
               </div>
             )
           })}
@@ -52,8 +52,8 @@ export const query = graphql`
           frontmatter {
             title
             date
+            excerpt
           }
-          excerpt
         }
       }
     }

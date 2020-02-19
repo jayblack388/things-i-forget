@@ -1,27 +1,56 @@
 import React from "react"
-import { StaticQuery, graphql, Link } from "gatsby"
+import { StaticQuery, graphql } from "gatsby"
+import { Nav } from "jdb-components"
 
-const ListLink = props => (
-  <li style={{ display: `inline-block`, marginRight: `1rem` }}>
-    <Link to={props.to}>{props.children}</Link>
-  </li>
-)
-
-const TitleAndDescription = ({ data }) => {
-  const { title, description } = data.site.siteMetadata
+const Title = ({ data }) => {
+  const { title } = data.site.siteMetadata
+  const links = [
+    {
+      name: "Home",
+      path: "/",
+    },
+    {
+      name: "About",
+      path: "/about",
+    },
+    {
+      name: "Contact",
+      path: "/contact",
+    },
+    {
+      name: "Spring",
+      path: "https://react-spring.io",
+    },
+  ]
+  const menuText = {
+    openText: title,
+    closeText: "Close",
+  }
   return (
-    <header style={{ marginBottom: `1.5rem` }}>
-      <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
-        <h3 style={{ display: `inline` }}>{title}</h3>
-      </Link>
-      <ul style={{ listStyle: `none`, float: `right` }}>
-        <ListLink to="/">Home</ListLink>
-        <ListLink to="/about/">About</ListLink>
-        <ListLink to="/contact/">Contact</ListLink>
-      </ul>
-      <p>{description}</p>
-    </header>
+    <Nav
+      menuText={menuText}
+      menuColor="primary"
+      headerColor="primary"
+      links={links}
+      height="3rem"
+      width="31%"
+      isGatsby
+    />
   )
+
+  // return (
+  //   <header style={{ marginBottom: `1.5rem` }}>
+  //     <Link to="/" style={{ textShadow: `none`, backgroundImage: `none` }}>
+  //       <h3 style={{ display: `inline` }}>{title}</h3>
+  //     </Link>
+  //     <ul style={{ listStyle: `none`, float: `right` }}>
+  //       <ListLink to="/">Home</ListLink>
+  //       <ListLink to="/about/">About</ListLink>
+  //       <ListLink to="/contact/">Contact</ListLink>
+  //     </ul>
+  //     <p>{description}</p>
+  //   </header>
+  // )
 }
 
 const Header = () => {
@@ -32,12 +61,11 @@ const Header = () => {
           site {
             siteMetadata {
               title
-              description
             }
           }
         }
       `}
-      render={data => <TitleAndDescription data={data} />}
+      render={data => <Title data={data} />}
     />
   )
 }

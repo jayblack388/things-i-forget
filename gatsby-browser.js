@@ -1,7 +1,13 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
+import React from "react"
+import { ThemeProvider } from "styled-components"
+import { Theme, WindowDimensionsProvider } from "jdb-components"
 
-// You can delete this file if you're not using it
+export const wrapRootElement = ({ element }) => {
+  if (typeof window !== "undefined") {
+    return (
+      <ThemeProvider theme={Theme}>
+        <WindowDimensionsProvider>{element}</WindowDimensionsProvider>
+      </ThemeProvider>
+    )
+  }
+}

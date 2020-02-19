@@ -7,33 +7,23 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
-
+import { Page, ColDiv } from "jdb-components"
 import Header from "./header"
-import "./layout.css"
 
 const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
   return (
     <>
-      <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
-        <Header />
-        <main>{children}</main>
-        <footer>
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.org">Gatsby</a>
-        </footer>
-      </div>
+      <Header />
+      <Page minH="calc(100vh - 3rem)">
+        <ColDiv p="0.8rem 4rem" align="center" justify="flex-start">
+          {children}
+        </ColDiv>
+      </Page>
+      <footer>
+        © {new Date().getFullYear()}, Built with
+        {` `}
+        <a href="https://www.gatsbyjs.org">Gatsby</a>
+      </footer>
     </>
   )
 }
